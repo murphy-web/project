@@ -306,91 +306,57 @@
         </section>
 
         <!-- Форма записи -->
-        <section class="booking-section section-padding" id="contact">
-            <div class="container">
-                <div class="booking-wrapper">
-                    <div class="booking-info">
-                        <h2 class="section-title">Запись на сеанс</h2>
-                        <p class="booking-description">
-                            Оставьте заявку и наш администратор свяжется с вами в течение 30 минут для уточнения деталей и согласования времени.
-                        </p>
-                        
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div>
-                                    <h4>Адрес студии</h4>
-                                    <p>Краснодар</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <div>
-                                    <h4>Телефон</h4>
-                                    <p>+7 (999) 123-45-67</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <i class="fas fa-clock"></i>
-                                <div>
-                                    <h4>Часы работы</h4>
-                                    <p>Ежедневно с 11:00 до 22:00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="booking-form-container">
-                        <form id="booking-form" class="booking-form">
-                            <div class="form-group">
-                                <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" name="name" required placeholder="Иван Иванов">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Телефон *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="ivan@example.com">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="service">Интересующий стиль</label>
-                                <select id="service" name="service">
-                                    <option value="" selected>Не выбрано</option>
-                                    <!-- Опции будут загружены через JS -->
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="date">Предпочтительная дата *</label>
-                                <input type="date" id="date" name="date" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Описание идеи</label>
-                                <textarea id="message" name="message" rows="4" placeholder="Опишите вашу идею, размер, место на теле..."></textarea>
-                            </div>
-                            
-                            <div class="form-group checkbox-group">
-                                <input type="checkbox" id="agreement" name="agreement" required>
-                                <label for="agreement">Я согласен на обработку персональных данных</label>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-submit" id="submit-btn">
-                                <span class="btn-text">Отправить заявку</span>
-                                <div class="spinner hidden" id="form-spinner"></div>
-                            </button>
-                            
-                            <div class="form-message" id="form-message"></div>
-                        </form>
-                    </div>
-                </div>
+        
+              <div class="contact-form-container">
+        <!-- Сообщения о статусе отправки -->
+        <div id="form-success" class="form-message form-success">
+            ✅ Сообщение успешно отправлено! Мы ответим вам в ближайшее время.
+        </div>
+        <div id="form-error" class="form-message form-error">
+            ❌ Произошла ошибка при отправке. Пожалуйста, попробуйте позже.
+        </div>
+        
+        <!-- Форма - замените YOUR_FORM_ID на реальный с Formspree -->
+        <form 
+            id="contactForm" 
+            action="https://formspree.io/f/xdaoojgp" 
+            method="POST"
+        >
+            <input type="hidden" name="_language" value="ru">
+            
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Ваше имя" 
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Ваш email" 
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <input 
+                    type="tel" 
+                    name="phone" 
+                    placeholder="Ваш телефон (необязательно)"
+                >
+            </div>
+            
+            <div class="form-group">
+                <textarea 
+                    name="message" 
+                    placeholder="Ваше сообщение" 
+                    rows="5" 
+                    required
+                ></textarea>
             </div>
         </section>
     </main>
@@ -465,4 +431,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
