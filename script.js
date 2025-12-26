@@ -833,6 +833,79 @@ function initSmoothScroll() {
         });
     });
 }
+document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('form-success');
+            const errorMessage = document.getElementById('form-error');
+            const submitBtn = form.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            // Скрываем сообщения при загрузке
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            form.addEventListener('submit', function(e) {
+                // Показываем индикатор загрузки
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-flex';
+                submitBtn.disabled = true;
+                
+                // Скрываем предыдущие сообщения
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Отправка через Formspree (форма сама отправится)
+                // Добавляем обработку успешной отправки
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Успешно отправлено
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        // Прокрутка к сообщению об успехе
+                        successMessage.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    } else {
+                        throw new Error('Ошибка отправки');
+                    }
+                })
+                .catch(error => {
+                    // Ошибка
+                    errorMessage.style.display = 'block';
+                    errorMessage.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                    console.error('Ошибка:', error);
+                })
+                .finally(() => {
+                    // Восстанавливаем кнопку
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+            });
+            
+            // Валидация формы перед отправкой
+            form.addEventListener('input', function(e) {
+                const target = e.target;
+                if (target.hasAttribute('required') && target.value.trim() === '') {
+                    target.classList.add('invalid');
+                } else {
+                    target.classList.remove('invalid');
+                }
+            });
+        });
 
 // ===== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -843,4 +916,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initBookingForm();
     initContactButtons();
     initSmoothScroll();
+
 });
